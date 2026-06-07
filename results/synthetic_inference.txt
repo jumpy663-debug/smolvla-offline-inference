@@ -1,13 +1,30 @@
-Expected result summary:
-
 device: cuda
-processed keys include:
-- observation.state: (1, 6)
-- observation.images.camera1: (1, 3, 256, 256)
-- observation.images.camera2: (1, 3, 256, 256)
-- observation.images.camera3: (1, 3, 256, 256)
-- observation.language.tokens: (1, 48)
-- observation.language.attention_mask: (1, 48)
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Reducing the number of VLM layers to 16 ...
+
+raw batch:
+observation.state (1, 6) torch.float32 cpu
+observation.images.camera1 (1, 3, 256, 256) torch.float32 cpu
+observation.images.camera2 (1, 3, 256, 256) torch.float32 cpu
+observation.images.camera3 (1, 3, 256, 256) torch.float32 cpu
+task <class 'list'> ['pick up the cube']
+
+processed batch:
+action <class 'NoneType'> 
+next.reward <class 'float'> 0.0
+next.done <class 'bool'> False
+next.truncated <class 'bool'> False
+info <class 'dict'> 
+task <class 'list'> ['pick up the cube\n']
+observation.state (1, 6) torch.float32 cuda:0
+observation.images.camera1 (1, 3, 256, 256) torch.float32 cuda:0
+observation.images.camera2 (1, 3, 256, 256) torch.float32 cuda:0
+observation.images.camera3 (1, 3, 256, 256) torch.float32 cuda:0
+observation.language.tokens (1, 48) torch.int64 cuda:0
+observation.language.attention_mask (1, 48) torch.bool cuda:0
 
 action_chunk shape: (1, 50, 6)
+action_chunk dtype: torch.float32
+action_chunk device: cuda:0
 single_action shape: (1, 6)
+single_action: tensor([[-0.1662,  0.2327, -0.0123,  0.3089,  0.2884, -0.1458]])

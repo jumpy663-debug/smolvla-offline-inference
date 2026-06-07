@@ -1,23 +1,33 @@
-Expected result summary:
-
+device: cuda
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Reducing the number of VLM layers to 16 ...
 dataset: lerobot/libero
+dataset length: 273465
 task: put the white mug on the left plate and put the yellow and white mug on the right plate
 original state shape: (8,)
 original action shape: (7,)
 
-adapter:
-- observation.images.image -> observation.images.camera1
-- observation.images.image2 -> observation.images.camera2
-- observation.images.image2 -> observation.images.camera3
-- observation.state[:6] -> observation.state
+adapted raw frame:
+observation.images.camera1 (3, 256, 256) torch.float32 cpu
+observation.images.camera2 (3, 256, 256) torch.float32 cpu
+observation.images.camera3 (3, 256, 256) torch.float32 cpu
+observation.state (6,) torch.float32 cpu
+task <class 'str'> put the white mug on the left plate and put the yellow and white mug on the right plate
 
-processed keys include:
-- observation.images.camera1: (1, 3, 256, 256)
-- observation.images.camera2: (1, 3, 256, 256)
-- observation.images.camera3: (1, 3, 256, 256)
-- observation.state: (1, 6)
-- observation.language.tokens: (1, 48)
-- observation.language.attention_mask: (1, 48)
+processed batch:
+action <class 'NoneType'> 
+next.reward <class 'float'> 0.0
+next.done <class 'bool'> False
+next.truncated <class 'bool'> False
+info <class 'dict'> 
+task <class 'list'> ['put the white mug on the left plate and put the yellow and white mug on the right plate\n']
+observation.images.camera1 (1, 3, 256, 256) torch.float32 cuda:0
+observation.images.camera2 (1, 3, 256, 256) torch.float32 cuda:0
+observation.images.camera3 (1, 3, 256, 256) torch.float32 cuda:0
+observation.state (1, 6) torch.float32 cuda:0
+observation.language.tokens (1, 48) torch.int64 cuda:0
+observation.language.attention_mask (1, 48) torch.bool cuda:0
 
 action_chunk shape: (1, 50, 6)
 single_action shape: (1, 6)
+single_action: tensor([[-0.3021,  0.3700,  1.1122,  2.0188, -0.0833, -0.0776]])
