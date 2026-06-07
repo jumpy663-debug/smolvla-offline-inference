@@ -1,0 +1,13 @@
+Expected result summary:
+
+device: cuda
+processed keys include:
+- observation.state: (1, 6)
+- observation.images.camera1: (1, 3, 256, 256)
+- observation.images.camera2: (1, 3, 256, 256)
+- observation.images.camera3: (1, 3, 256, 256)
+- observation.language.tokens: (1, 48)
+- observation.language.attention_mask: (1, 48)
+
+action_chunk shape: (1, 50, 6)
+single_action shape: (1, 6)
