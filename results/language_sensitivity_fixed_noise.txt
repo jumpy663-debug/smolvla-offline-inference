@@ -1,0 +1,36 @@
+device: cuda
+model: lerobot/smolvla_base
+Loading  HuggingFaceTB/SmolVLM2-500M-Video-Instruct weights ...
+Reducing the number of VLM layers to 16 ...
+
+TASK: pick up the cube
+action_chunk shape: (1, 50, 6)
+first action: tensor([-0.0625,  0.3223,  0.1195,  0.0973,  0.0673, -0.0358])
+chunk mean: 0.19071753323078156
+chunk std: 0.362901896238327
+
+TASK: move the object to the left
+action_chunk shape: (1, 50, 6)
+first action: tensor([-0.0998,  0.3963,  0.2198,  0.1723, -0.0257, -0.2080])
+chunk mean: 0.16834452748298645
+chunk std: 0.4070979654788971
+
+TASK: put the cube into the box
+action_chunk shape: (1, 50, 6)
+first action: tensor([-0.0696,  0.4655,  0.2325,  0.1676, -0.0130, -0.1328])
+chunk mean: 0.23440656065940857
+chunk std: 0.45808273553848267
+
+TASK: move the object to the right
+action_chunk shape: (1, 50, 6)
+first action: tensor([-0.1055,  0.4206,  0.2374,  0.1760, -0.0096, -0.1658])
+chunk mean: 0.24735654890537262
+chunk std: 0.444604754447937
+
+Pairwise action_chunk distances:
+'pick up the cube' vs 'move the object to the left': L2=3.489255, MAE=0.145045
+'pick up the cube' vs 'put the cube into the box': L2=2.120394, MAE=0.108041
+'pick up the cube' vs 'move the object to the right': L2=2.383248, MAE=0.104403
+'move the object to the left' vs 'put the cube into the box': L2=4.234123, MAE=0.162163
+'move the object to the left' vs 'move the object to the right': L2=4.206891, MAE=0.158425
+'put the cube into the box' vs 'move the object to the right': L2=1.094600, MAE=0.054310

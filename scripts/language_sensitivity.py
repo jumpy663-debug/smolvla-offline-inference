@@ -6,7 +6,7 @@ from lerobot.policies import make_pre_post_processors
 from lerobot.policies.smolvla import SmolVLAPolicy
 
 
-def run_policy(policy, preprocess, task, device):
+def run_policy(policy, preprocess, task, fixed_noise):
     raw_batch = {
         "observation.state": torch.zeros(1, 6),
         "observation.images.camera1": torch.zeros(1, 3, 256, 256),
@@ -18,7 +18,7 @@ def run_policy(policy, preprocess, task, device):
     batch = preprocess(raw_batch)
 
     with torch.inference_mode():
-        action_chunk = policy.predict_action_chunk(batch)
+        action_chunk = policy.predict_action_chunk(batch, noise=fixed_noise)
 
     return action_chunk.detach().cpu()
 
@@ -43,11 +43,19 @@ def main():
         model_id,
         preprocessor_overrides={"device_processor": {"device": str(device)}},
     )
+    torch.manual_seed(42)
+
+    fixed_noise = torch.randn(
+        1,
+        policy.config.chunk_size,
+        policy.config.max_action_dim,
+        device=device,
+    )
 
     outputs = {}
 
     for task in tasks:
-        action_chunk = run_policy(policy, preprocess, task, device)
+        action_chunk = run_policy(policy, preprocess, task, fixed_noise)
         outputs[task] = action_chunk
         print("\nTASK:", task)
         print("action_chunk shape:", tuple(action_chunk.shape))
