@@ -126,6 +126,21 @@ single action shape: (1, 6)
 
 限制：该 adapter 仅用于验证离线推理链路。由于 state/action 维度和相机定义不完全匹配，不能据此声称 SmolVLA 在 LIBERO 上完成有效策略执行。
 
+## 实验 3：语言指令敏感性分析
+
+为排除 flow matching 随机噪声的影响，实验固定同一份 noise、同一组 zero image 和 zero state，只改变语言指令，比较输出 action chunk 的差异。
+
+| 指令对比 | L2 Distance | MAE |
+|---|---:|---:|
+| pick up the cube vs move the object to the left | 3.489 | 0.145 |
+| pick up the cube vs put the cube into the box | 2.120 | 0.108 |
+| pick up the cube vs move the object to the right | 2.383 | 0.104 |
+| move the object to the left vs put the cube into the box | 4.234 | 0.162 |
+| move the object to the left vs move the object to the right | 4.207 | 0.158 |
+| put the cube into the box vs move the object to the right | 1.095 | 0.054 |
+
+结论：在固定 noise 的条件下，不同语言指令仍会导致 action chunk 变化，说明 language tokens 会参与 SmolVLA 的动作生成。但由于当前使用 synthetic zero image/state，该实验不能证明动作语义正确，只能证明语言条件会影响输出。
+
 ## 技术理解
 
 SmolVLA 与 ACT 的核心差异：
